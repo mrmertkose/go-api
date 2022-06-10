@@ -1,6 +1,5 @@
-
-# Created by https://www.toptal.com/developers/gitignore/api/go,goland
-# Edit at https://www.toptal.com/developers/gitignore?templates=go,goland
+### dotenv ###
+.env
 
 ### Go ###
 # If you prefer the allow list template instead of the deny list, see community template:
@@ -141,5 +140,3 @@ fabric.properties
 # Azure Toolkit for IntelliJ plugin
 # https://plugins.jetbrains.com/plugin/8053-azure-toolkit-for-intellij
 .idea/**/azureSettings.xml
-
-# End of https://www.toptal.com/developers/gitignore/api/go,goland
