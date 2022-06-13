@@ -2,7 +2,7 @@ package database
 
 import (
 	"fmt"
-	"github.com/mrmertkose/go-api/models"
+	"github.com/mrmertkose/go-api/app/models"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"log"
