@@ -11,8 +11,8 @@ func Setup(app *fiber.App) {
 		return c.SendString("root")
 	})
 
-	app.Post("/api/register", auth.Register)
-	app.Post("/api/login", auth.Login)
-	app.Post("/api/logout", auth.Logout)
+	app.Post("/register", auth.Register)
+	app.Post("/login", auth.Login)
+	app.Post("/logout", auth.Logout)
 
 }

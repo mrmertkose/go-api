@@ -23,5 +23,9 @@ func main() {
 		AllowCredentials: true,
 	}))
 	routes.Setup(app)
-	app.Listen(":8000")
+
+	err := app.Listen(":8000")
+	if err != nil {
+		log.Fatal("Not listen to port", err)
+	}
 }
