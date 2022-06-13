@@ -46,9 +46,19 @@ func Login(ctx *fiber.Ctx) error {
 		})
 	}
 
+	//generate jwt token
+	token, errorGenToken := utils.GenerateToken(user.Id)
+	if errorGenToken != nil {
+		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"success": false,
+			"message": "Wrong credentials",
+		})
+	}
+
 	return ctx.Status(fiber.StatusOK).JSON(fiber.Map{
 		"success": true,
-		"token":   "secret",
+		"data":    user,
+		"token":   token,
 	})
 }
 
@@ -88,10 +98,11 @@ func Register(ctx *fiber.Ctx) error {
 	if errCreateUser != nil {
 		return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"success": false,
-			"message": "Failed to store data",
-			"error":   errValidate.Error(),
+			"message": "This email address already in use",
 		})
 	}
+
+	//generate jwt token
 
 	return ctx.Status(fiber.StatusOK).JSON(fiber.Map{
 		"success": true,
