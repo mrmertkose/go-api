@@ -4,7 +4,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
-	"github.com/mrmertkose/go-api/app/database"
+	"github.com/mrmertkose/go-api/config/database"
 	"github.com/mrmertkose/go-api/routes"
 	"log"
 )
@@ -18,10 +18,13 @@ func init() {
 
 func main() {
 	database.Connect()
+
 	app := fiber.New()
+
 	app.Use(cors.New(cors.Config{
 		AllowCredentials: true,
 	}))
+
 	routes.Setup(app)
 
 	err := app.Listen(":8000")
