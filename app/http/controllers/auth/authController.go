@@ -103,14 +103,33 @@ func Register(ctx *fiber.Ctx) error {
 	}
 
 	//generate jwt token
+	token, errorGenToken := utils.GenerateToken(newUser.Id)
+	if errorGenToken != nil {
+		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"success": false,
+			"message": "Wrong credentials",
+		})
+	}
 
 	return ctx.Status(fiber.StatusOK).JSON(fiber.Map{
 		"success": true,
 		"data":    newUser,
+		"token":   token,
 	})
 
 }
 
 func Logout(ctx *fiber.Ctx) error {
-	return ctx.Status(200).JSON(true)
+	userId := ctx.Locals("id")
+	err := database.DB.First(&user, "id = ?", userId).Error
+	if err != nil {
+		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"success": false,
+			"message": "Wrong credentials",
+		})
+	}
+
+	return ctx.Status(fiber.StatusOK).JSON(fiber.Map{
+		"success": true,
+	})
 }

@@ -15,12 +15,15 @@ func Auth(ctx *fiber.Ctx) error {
 
 	}
 
-	_, err := utils.VerifyToken(token)
+	claims, err := utils.DecodeToken(token)
 	if err != nil {
 		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"success": false,
 			"message": "unauthenticated",
 		})
 	}
+
+	ctx.Locals("id", claims["Id"])
+
 	return ctx.Next()
 }
