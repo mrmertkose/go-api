@@ -9,13 +9,13 @@ import (
 
 var secretKey = os.Getenv("JWT_SECRET_KEY")
 
-//var exprationTime = os.Getenv("JWT_SECRET_KEY_EXPIRE_MINUTES_COUNT")
+//var exprationTime = os.Getenv("JWT_SECRET_KEY_EXPIRE")
 
 func GenerateToken(id uint) (string, error) {
 	//expires time sonra bak
 	claims := jwt.MapClaims{
 		"Id":        id,
-		"ExpiresAt": time.Now().Add(15 * time.Hour).Unix(),
+		"ExpiresAt": time.Now().Add(1500 * time.Hour).Unix(),
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)

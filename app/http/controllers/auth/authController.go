@@ -125,7 +125,7 @@ func Logout(ctx *fiber.Ctx) error {
 	if err != nil {
 		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"success": false,
-			"message": "Wrong credentials",
+			"message": "Not user",
 		})
 	}
 
